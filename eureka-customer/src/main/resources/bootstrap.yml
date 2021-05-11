@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      name: myconfig #从gitHub读取的资源名称，没有yml后缀
+      profile: test #读取的是哪个文档块的配置
+      label: master # 读取的是github上的哪个分支
+      uri: http://localhost:8085 # 从哪个配置服务中心读取

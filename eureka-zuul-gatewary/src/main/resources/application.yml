@@ -1,0 +1,55 @@
+server:
+  port: 8090 #应用端口
+management:
+  endpoint:
+    health:
+      enabled: true
+spring:
+
+  application:
+    name: eureka-zuul-gatewary #应用名称
+  redis:
+    database: 2
+    host: localhost
+    port: 6379
+    password: XqbSXMIThB6MyHWV
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+    timeout: 100ms
+    management:
+      endpoint:
+        health:
+          enabled: true
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/liao?characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      maximum-pool-size: 9
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: eureka-gatewary #自定义hystrix服务器名称相关名称
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8751/eureka/ #注册中心地址，若想做成集群，在service-url配置多个地址即可
+zuul:
+  routes:
+    myCustomer.serviceId: eureka-customer #微服务名称
+    myCustomer.path: /myCustomer/**
+    myProvide.serviceId: eureka-provide
+    myProvide.path: /myProvide/**
+  ignored-services: eureka-customer, eureka-provide #设置只有一个访问路口，使得直接通过myCustomer.serviceId+接口路径不能访问，只能通过myCustomer+接口路径访问，参数*代表忽略多个微服务，都只能让设置得myProvide.path访问
+  prefix: /myApplication #设置访问统一前缀，通过/myApplication/+myProvide.path+接口路径访问
+  host:
+    connect-timeout-millis: 3000
+    socket-timeout-millis: 3000

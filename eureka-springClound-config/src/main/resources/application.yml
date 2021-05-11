@@ -1,0 +1,10 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: springClound-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: git@github.com:liaojieping/spingCloundConfig.git

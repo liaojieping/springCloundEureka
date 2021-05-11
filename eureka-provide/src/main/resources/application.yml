@@ -1,0 +1,25 @@
+server:
+  port: 8081 #应用端口
+spring:
+  application:
+    name: eureka-provide #应用名称
+  redis:
+    database: 2
+    host: localhost
+    port: 32768
+    password: 1qaz@WSX
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+    timeout: 100ms
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8751/eureka/ #注册中心地址，若想做成集群，在service-url配置多个地址即可
+

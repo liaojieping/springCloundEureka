@@ -1,0 +1,10 @@
+server:
+  port: 8751 #应用端口
+eureka:
+  instance:
+    hostname: erureka-server #erureka主机实例名
+  client:
+    fetch-registry: false #不从erureka获取注册服务信息
+    register-with-eureka: false #不把自己注册到erureka上
+    service-url:
+      defaultZone: http://localhost:8751/eureka/ #注册中心地 址，若想做成集群，在service-url配置多个地址即可
